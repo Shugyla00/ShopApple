@@ -1,0 +1,36 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<!--<p>Содержимое главной страницы-->
+<ul class="list-articles">
+    {% for p in posts %}
+    <li>
+        <h2>{{p.title}}</h2>
+        {% autoescape on %}
+        {{p.content|linebreaks|truncatewords:10}}
+        {% endautoescape %}
+                 <div class="clear"></div>
+                 <p class="Link-read-post"><a href="#">Читать пост</a></p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>{{ title }}</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<ul>-->
+<!--    {% for m in menu %}-->
+<!--    <li>{{m}}</li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+
+<!--</body>-->
+<!--</html>-->
