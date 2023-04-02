@@ -1,0 +1,56 @@
+
+.cards {
+    margin-right: 50px;
+    display: flex;
+    gap: 20px 1px;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 30%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.7);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+.item{
+    display: flex;
+    width: 500px;
+}
+.item-img{
+
+}
+.item-content{
+
+}

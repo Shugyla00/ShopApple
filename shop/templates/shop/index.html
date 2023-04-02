@@ -1,36 +1,27 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<!--<p>Содержимое главной страницы-->
-<ul class="list-articles">
-    {% for p in posts %}
-    <li>
-        <h2>{{p.title}}</h2>
-        {% autoescape on %}
-        {{p.content|linebreaks|truncatewords:10}}
-        {% endautoescape %}
-                 <div class="clear"></div>
-                 <p class="Link-read-post"><a href="#">Читать пост</a></p>
-    </li>
-    {% endfor %}
-</ul>
+    <div class="cards">
+        {% for p in object_list %}
+            <div class="card" >
+                <a style="text-decoration: none" href="{{ p.get_absolute_url }}">
+                    <img src="{{ p.photo.url }}" alt="Avatar" style="width:100%">
+                    <div class="container">
+                        <h4><b>{{ p.name }} {{ p.model }}</b></h4>
+                        <p>Architect & Engineer</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            <a href="?page=1">&laquo;</a>
+            {% for foo in page_obj.paginator.page_range %}
+                <a href="?page={{ foo }}"
+                   class="{% if foo == page_obj.number %}active{% else %}{% endif %}"> {{ foo }}</a>
+            {% endfor %}
 
+            <a href="?page=2">&raquo;</a>
+        </div>
+    </div>
 {% endblock %}
 
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>{{ title }}</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<ul>-->
-<!--    {% for m in menu %}-->
-<!--    <li>{{m}}</li>-->
-<!--    {% endfor %}-->
-<!--</ul>-->
-
-<!--</body>-->
-<!--</html>-->

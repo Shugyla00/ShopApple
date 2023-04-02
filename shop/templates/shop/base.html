@@ -2,63 +2,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{title}}</title>
-	<link type="text/css" href="{% static 'shop/css/styles.css' %}" rel="stylesheet" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="shortcut icon" href="{% static 'shop/images/main.ico' %}" type="image/x-icon"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} {% else %} title{% endif %} </title>
+    <link type="text/css" href="{% static 'shop/css/styles.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'shop/css/card.css' %}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <table class="table-page" border=0 cellpadding="0" cellspacing="0">
-<tr><td valign=top>
-{% block mainmenu %}
-		<div class="header">
-			<ul id="mainmenu" class="mainmenu">
-			<li class="logo"><a href="#"><div class="logo"></div></a></li>
-{% for m in menu %}
-	{% if not forloop.last %}
-			<li><a href="#">{{m.title}}</a></li>
-	{% else %}
-			<li class="last"><a href="#">{{m.title}}</a></li>
-	{% endif %}
-{% endfor %}
-			</ul>
-			<div class="clear"></div>
-		</div>
-{% endblock mainmenu %}
+    <tr>
+        <td valign=top>
+            <div class="header">
+                <ul id="mainmenu" class="mainmenu">
+                    <li class="logo"><a href="#">
+                        <div class="logo"></div>
+                    </a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="#">news</a></li>
+                    <li><a href="#">contact</a></li>
+
+                    {% if  user.is_authenticated %}
+                        <li class="last"><a href="{% url 'logout' %}">logout</a></li>
+                        <li class="last"><a href="#">profile</a></li>
+                    {% else %}
+                        <li class="last"><a href="{% url 'login' %}">login</a></li>
+                        <li class="last"><a href="{% url 'register' %}">register</a></li>
+                    {% endif %}
+                </ul>
+                <div class="clear"></div>
+            </div>
 
 
-<table class="table-content" border=0 cellpadding="0" cellspacing="0">
-<tr>
-<!-- Sidebar слева -->
-	<td valign="top" class="left-chapters">
-	<ul id="leftchapters">
-		<li class="selected">Все категории</li>
-		<li><a href="#">Смортфоны</a></li>
-		<li><a href="#">Наушники</a></li>
-		<li><a href="#">Applewatch</a></li>
-	</ul>
-</td>
+            <table class="table-content" border=0 cellpadding="0" cellspacing="0">
+                <tr>
+                    <!-- Sidebar слева -->
+                    <td valign="top" class="left-chapters">
+                        <ul id="leftchapters">
+                            <li class="selected"><a href="{% url 'home' %}">Все категории</a></li>
+                            {% for cat in cats %}
+                                <li><a href="#">{{ cat.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
 
-<td valign="top" class="content">
-
-	{% block breadcrumbs %}
-	{% endblock %}
-
-
-	<div class="content-text">
-{% block content %}
-{% endblock %}
-	</div>
+                    <td valign="top" class="content">
+                        <div class="content-text">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
 
 
-</td></tr></table>
-</td></tr>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 
-<tr><td valign=top>
-	<div id="footer">
-	</div>
-</td></tr></table>
+    <tr>
+        <td valign=top>
+            <div id="footer">
+            </div>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>

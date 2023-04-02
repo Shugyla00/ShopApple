@@ -1,0 +1,19 @@
+
+
+{% extends 'shop/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+   <div>
+       <form class="my-class" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+           <button>register</button>
+        </form>
+   </div>
+
+{% endblock %}
+
