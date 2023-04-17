@@ -1,0 +1,462 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+    <style>
+        body {
+            background: #ddd;
+            min-height: 100vh;
+            vertical-align: middle;
+            display: flex;
+
+        }
+
+        .card {
+            margin: auto;
+            width: 600px;
+            padding: 3rem 3.5rem;
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .mt-50 {
+            margin-top: 50px
+        }
+
+        .mb-50 {
+            margin-bottom: 50px
+        }
+
+
+        @media (max-width: 767px) {
+            .card {
+                width: 90%;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (height: 1366px) {
+            .card {
+                width: 90%;
+                padding: 8vh;
+            }
+        }
+
+
+        .nav ul {
+            list-style-type: none;
+            display: flex;
+            padding-inline-start: unset;
+            margin-bottom: 6vh;
+        }
+
+        .nav li {
+            padding: 1rem;
+        }
+
+        .nav li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .active {
+            border-bottom: 2px solid black;
+            font-weight: bold;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000;
+            width: 100%;
+            min-width: unset;
+            background-color: transparent;
+            border-color: transparent;
+            margin: 0;
+        }
+
+        form a {
+            color: grey;
+            text-decoration: none;
+            font-size: 0.87rem;
+            font-weight: bold;
+        }
+
+        form a:hover {
+            color: grey;
+            text-decoration: none;
+        }
+
+        form .row {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        form .row-1 {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 0.5rem;
+            outline: none;
+            width: 100%;
+            min-width: unset;
+            border-radius: 5px;
+            background-color: rgba(221, 228, 236, 0.301);
+            border-color: rgba(221, 228, 236, 0.459);
+            margin: 2vh 0;
+            overflow: hidden;
+        }
+
+        form .row-2 {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            margin: 0;
+            padding: 0 0.8rem;
+        }
+
+        form .row .row-2 {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            margin: 0;
+            padding: 0 0.8rem;
+        }
+
+        form .row .col-2, .col-7, .col-3 {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0 1vh;
+        }
+
+        form .row .col-2 {
+            padding-right: 0;
+        }
+
+        #card-header {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #card-inner {
+            font-size: 0.7rem;
+            color: gray;
+        }
+
+        .three .col-7 {
+            padding-left: 0;
+        }
+
+        .three {
+            overflow: hidden;
+            justify-content: space-between;
+        }
+
+        .three .col-2 {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 0.5rem;
+            outline: none;
+            width: 100%;
+            min-width: unset;
+            border-radius: 5px;
+            background-color: rgba(221, 228, 236, 0.301);
+            border-color: rgba(221, 228, 236, 0.459);
+            margin: 2vh 0;
+            width: fit-content;
+            overflow: hidden;
+        }
+
+        .three .col-2 input {
+            font-size: 0.7rem;
+            margin-left: 1vh;
+        }
+
+
+        input:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        input:focus:-moz-placeholder {
+            color: transparent;
+        }
+
+        input:focus::-moz-placeholder {
+            color: transparent;
+        }
+
+        input:focus:-ms-input-placeholder {
+            color: transparent;
+        }
+
+
+        @media (max-width: 991px) {
+            .about-text {
+                margin-top: 40px;
+            }
+        }
+
+        .about-text h3 {
+            font-size: 45px;
+            font-weight: 700;
+            margin: 0 0 10px;
+        }
+
+        @media (max-width: 767px) {
+            .about-text h3 {
+                font-size: 35px;
+            }
+        }
+
+        .about-text h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 767px) {
+            .about-text h4 {
+                font-size: 18px;
+            }
+        }
+
+        .about-text p {
+            font-size: 18px;
+        }
+
+        .about-text p mark {
+            font-weight: 600;
+            color: #3a3973;
+        }
+
+        .about-text .btn-bar {
+            padding-top: 8px;
+        }
+
+        .about-text .btn-bar button {
+            min-width: 150px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+
+        .about-list .media {
+            padding: 5px 0;
+        }
+
+        .about-list label {
+            color: #3a3973;
+            font-weight: 600;
+            width: 88px;
+            margin: 0;
+            position: relative;
+        }
+
+        .about-list label:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 11px;
+            width: 1px;
+            height: 12px;
+            background: #3a3973;
+            -moz-transform: rotate(15deg);
+            -o-transform: rotate(15deg);
+            -ms-transform: rotate(15deg);
+            -webkit-transform: rotate(15deg);
+            transform: rotate(15deg);
+            margin: auto;
+            opacity: 0.5;
+        }
+
+        .about-list p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .about-img {
+            box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.06);
+            padding: 10px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 991px) {
+            .about-img {
+                margin-top: 30px;
+            }
+        }
+
+
+        .counter-section .count-data {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .counter-section .count {
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 10px;
+        }
+
+        .counter-section p {
+            font-weight: 500;
+            margin: 0;
+            color: #fe4f6c;
+        }
+
+        .theme-color {
+            color: #fe4f6c;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .gray-bg {
+            background-color: #ebf4fa;
+        }
+
+        .px-btn.theme {
+            background: #fe4f6c;
+            color: #ffffff;
+            border: 2px solid #fe4f6c;
+        }
+
+        .px-btn {
+            padding: 0 20px;
+            line-height: 42px;
+            border: 2px solid transparent;
+            position: relative;
+            display: inline-block;
+            background: none;
+            border: none;
+            -moz-transition: ease all 0.35s;
+            -o-transition: ease all 0.35s;
+            -webkit-transition: ease all 0.35s;
+            transition: ease all 0.35s;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .px-btn.theme-t {
+            background: transparent;
+            border: 2px solid #fe4f6c;
+            color: #fe4f6c;
+        }
+
+    </style>
+
+
+
+    <section class="section about-section gray-bg" id="about">
+        <div class="container">
+            <div class="row align-items-center justify-content-around flex-row-reverse">
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <h3 class="dark-color">{{ request.user.username }}</h3>
+                        <h4 class="theme-color">email: {{ request.user.email }}</h4>
+                        <p>{{ request.user.bio }}</p>
+                        <p>phone number : {{ request.user.phoneNumber }}</p>
+                        <p>money : {{ request.user.money }} tg</p>
+                        <div class="btn-bar" style="display: flex">
+                            <div>
+                                <button class="px-btn theme" type="button" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                    edit profile
+                                </button>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+
+                                            </div>
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                {{ form.as_p }}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="px-btn theme-t" type="button" data-toggle="modal"
+                                        data-target="#exampleModal3">
+                                    add money
+                                </button>
+                                <div aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                     style="margin-left: 400px; height: 380px; margin-top: 100px" id="exampleModal3"
+                                     class="modal fade card mt-50 mb-50">
+                                    <form method="post" action="{% url 'updateUserMoney' %}">
+                                        {% csrf_token %}
+                                        <span id="card-header">Saved card:</span>
+
+                                        <div class="row row-1">
+                                            <div class="col-2"><img class="img-fluid"
+                                                                    src="https://img.icons8.com/color/48/000000/visa.png"/>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="number" placeholder="---- ---- ---- 4296" maxlength="20">
+                                            </div>
+                                            <div class="col-3 d-flex justify-content-center">
+                                                <a href="#">Remove card</a>
+                                            </div>
+                                        </div>
+
+                                        <span id="card-header">name :</span>
+                                        <div class="row-1">
+                                            <div class="row row-2">
+                                                <span id="card-inner">Card holder name</span>
+                                            </div>
+                                            <div class="row row-2">
+                                                <input type="text" placeholder="Bojan Viner">
+                                            </div>
+                                        </div>
+                                        <span id="card-header">money in card:</span>
+                                        <div class="row three">
+                                            <div class="col-7">
+                                                <div class="row-1">
+                                                    <div class="row row-2">
+                                                        <span id="card-inner">money</span>
+                                                    </div>
+                                                    <div class="row row-2">
+                                                        <input name="money" type="number" placeholder="1000">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <input type="date" placeholder="">
+                                            </div>
+                                            <div class="col-2">
+                                                <input type="password" placeholder="CVV" maxlength="3">
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-success"><b>Add money</b></button>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <div class="about-img">
+                        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

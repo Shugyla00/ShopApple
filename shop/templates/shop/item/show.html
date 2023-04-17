@@ -2,13 +2,36 @@
 
 {% block content %}
 
-    <div class="item">
-        <div class="item-img">
-            <img src="{{ object.photo.url }}" alt="..">
+
+{#    <div class="item">#}
+{#        <div class="item-img">#}
+{#            <img src="{{ object.photo.url }}" alt="..">#}
+{#        </div>#}
+{#        <div class="item-content">#}
+{#            <h1>{{ object.name }} {{ object.model }}</h1>#}
+{#            <p>{{ object.description }}</p>#}
+{#        </div>#}
+{#    </div>#}
+
+    <div class="card text-center" style=" width: 700px; margin-left: 150px">
+        <div class="card-header">
+            {{ object.name }}
         </div>
-        <div class="item-content">
-                <h1>{{ object.name }} {{ object.model }}</h1>
-            <p>{{ object.description }}</p>
+        <div >
+              <img height="180" width="180" src="{{ object.photo.url }}" alt="..">
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ object.description }}</p>
+               {% if  user.is_authenticated %}
+                   <form  method="post">
+                   {% csrf_token %}
+                       <input type="hidden" value="{{ object.id }}" name="item_id">
+                       <button type="submit" class="btn btn-primary">add to cart</button>
+                   </form>
+               {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            {{ object.time_create }}
         </div>
     </div>
 

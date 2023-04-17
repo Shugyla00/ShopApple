@@ -1,7 +1,9 @@
 {% extends 'shop/base.html' %}
+
 {% block content %}
+
     <div class="cards">
-        {% for p in object_list %}
+        {% for p in page_obj %}
             <div class="card" >
                 <a style="text-decoration: none" href="{{ p.get_absolute_url }}">
                     <img src="{{ p.photo.url }}" alt="Avatar" style="width:100%">
@@ -22,5 +24,6 @@
             <a href="?page=2">&raquo;</a>
         </div>
     </div>
+
 {% endblock %}
 
