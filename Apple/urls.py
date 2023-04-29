@@ -8,10 +8,12 @@ from shop.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
-    path('api/v1/users/', UserViewSet.as_view({'get': 'list', 'post': 'create'})),
-    path('api/v1/users/<int:pk>/', UserViewSet.as_view({'get': 'retrieve'})),
-    path('api/v1/items/', ItemViewSet.as_view({'get': 'list', 'post': 'create'})),
-    path('api/v1/items/<int:pk>/', ItemViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
+    path('api/users/', UserViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/users/<int:pk>/', UserViewSet.as_view({'get': 'retrieve'})),
+    path('api/categories/', CategoryViewSet.as_view({'get': 'list'})),
+    path('api/all/items/', PaginationItemsViewSet.as_view({'get': 'list'})),
+    path('api/items/', ItemViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/items/<int:pk>/', ItemViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
     path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', include('shop.urls')),
 ]

@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 
 from .forms import RegisterForm, UpdateUserForm
 from .models import *
-from .serializers import UserSerializer, ItemSerializer
+from .serializers import UserSerializer, ItemSerializer, CategorySerializer
 from .utils import DataMixin
 
 

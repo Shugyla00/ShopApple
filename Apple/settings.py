@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-8mmdo0ektj1&32_n(o59%!11485q_vw!5kb7n7gf_4ijl7hiae
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'captcha',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Apple.urls'
@@ -130,7 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGOUT_REDIRECT_URL = "home"
 LOGIN_REDIRECT_URL = "home"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-INTERNAL_IPS = ["127.0.0.1", ]
+INTERNAL_IPS = []
 
 CACHES = {
     'default': {
@@ -149,6 +151,8 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.AllowAny',
+
+    ],
 }
+CORS_ORIGIN_ALLOW_ALL = True
